@@ -6,10 +6,10 @@ requireRole(['admin']);
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $stmt = $pdo->prepare("UPDATE files SET approved = 1 WHERE id = ?");
+  $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
   $stmt->execute([$id]);
-  echo "✅ File approved.";
+  echo "✅ User deleted.";
 } else {
-  echo "❌ No file ID provided.";
+  echo "❌ No user ID provided.";
 }
 ?>

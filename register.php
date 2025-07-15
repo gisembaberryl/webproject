@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="password" name="password" placeholder="Password" required>
       <select name="role">
         <option value="student">Student</option>
-        <option value="instructor">Instructor</option>
+        <option value="lecturer">Lecturer</option>
         <option value="admin">Admin</option>
       </select>
       <button type="submit">Register</button>
@@ -38,3 +38,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </body>
 </html>
+

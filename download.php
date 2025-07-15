@@ -2,18 +2,19 @@
 require 'includes/db.php';
 require 'includes/auth.php';
 requireLogin();
+requireRole(['student']);
 
-$file_id = $_GET['id'];
-$stmt = $pdo->prepare("SELECT * FROM files WHERE id = ? AND approved = 1");
-$stmt->execute([$file_id]);
-$file = $stmt->fetch();
-
-if ($file && file_exists($file['filepath'])) {
-  header('Content-Type: application/octet-stream');
-  header('Content-Disposition: attachment; filename="' . $file['filename'] . '"');
-  readfile($file['filepath']);
-  exit();
+if (isset($_GET['file'])) {
+  $filepath = $_GET['file'];
+  if (file_exists($filepath)) {
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
+    readfile($filepath);
+    exit();
+  } else {
+    echo "❌ File not found.";
+  }
 } else {
-  echo "❌ File not found or not approved.";
+  echo "❌ No file specified.";
 }
 ?>

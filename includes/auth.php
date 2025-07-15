@@ -1,18 +1,17 @@
 <?php
 session_start();
 
-function isLoggedIn() {
-  return isset($_SESSION['user_id']);
-}
-
 function requireLogin() {
-  if (!isLoggedIn()) {
+  if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
   }
 }
 
-function hasRole($role) {
-  return isset($_SESSION['role']) && $_SESSION['role'] === $role;
+function requireRole($roles = []) {
+  if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], $roles)) {
+    header("Location: dashboard.php");
+    exit();
+  }
 }
 ?>
